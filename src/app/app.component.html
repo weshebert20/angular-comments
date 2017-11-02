@@ -1,4 +1,27 @@
 <h1>Comments</h1>
+
 <ul>
-    <li *ngFor="let comment of comments">{{comment}}</li>
+    <li *ngFor="let comment of comments">
+
+	<div *ngIf="!comment.editMode">
+    	{{comment.text}} -{{comment.author}}
+    	<button (click)="editComment(comment)">Edit</button>
+    	<button (click)="deleteComment(comment)">Delete</button>
+    </div>
+
+    <div *ngIf="comment.editMode">
+  		<input [(ngModel)]="comment.text" type="text" placeholder="text">
+  		<input [(ngModel)]="comment.author" type="text" placeholder="author">
+  		<button (click)="cancelComment(comment)">Cancel</button>
+  		<input (click)="editNow(comment)" type="submit">
+    </div>
+
+    </li>
 </ul>
+
+<section>
+  <input [(ngModel)]="newComment.text" type="text" placeholder="text">
+  <input [(ngModel)]="newComment.author" type="text" placeholder="author">
+
+  <input type="submit" (click)="addComment()">
+</section>
